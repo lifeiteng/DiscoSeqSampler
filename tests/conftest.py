@@ -4,9 +4,9 @@ import pytest
 
 
 @pytest.fixture()
-def sample_data():
+def cuts_file():
     """Provide sample data for tests."""
-    return {"test": "data"}
+    return "tests/data/libritts_cuts_dev-clean.jsonl.gz"
 
 
 @pytest.fixture()

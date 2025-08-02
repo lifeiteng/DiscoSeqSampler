@@ -58,9 +58,7 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        # 在这里添加您的依赖包
-        # 例如: "numpy>=1.19.0",
-        # "torch>=1.8.0",
+        "lhotse==1.30.3",
     ],
     extras_require={
         "dev": [

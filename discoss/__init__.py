@@ -2,7 +2,7 @@
 
 
 __version__ = "0.1.0"
-__author__ = "lifeiteng"
+__author__ = "Feiteng Li"
 __email__ = ""
 __description__ = "Distributed Coordinated Sequence Sampler"
 

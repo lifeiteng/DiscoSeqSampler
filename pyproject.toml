@@ -30,9 +30,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    # 在这里添加您的依赖包
-    # "numpy>=1.19.0",
-    # "torch>=1.8.0",
+    "lhotse==1.30.3",
 ]
 
 [project.optional-dependencies]
@@ -166,38 +164,12 @@ addopts = [
     "-q",
     "--strict-markers",
     "--strict-config",
-    "--cov=discoss",
-    "--cov-report=term-missing",
-    "--cov-report=html",
-    "--cov-report=xml",
 ]
 testpaths = ["tests"]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "unit: marks tests as unit tests",
     "integration: marks tests as integration tests",
-]
-
-[tool.coverage.run]
-source = ["discoss"]
-omit = [
-    "*/tests/*",
-    "*/test_*",
-    "setup.py",
-]
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "if self.debug:",
-    "if settings.DEBUG",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "if 0:",
-    "if __name__ == .__main__.:",
-    "class .*\\bProtocol\\):",
-    "@(abc\\.)?abstractmethod",
 ]
 
 [tool.bandit]

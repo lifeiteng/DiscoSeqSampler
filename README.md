@@ -67,6 +67,13 @@ make setup-dev
 ### 运行测试
 
 ```bash
+lhotse download libritts -p dev-clean tests/data
+lhotse prepare libritts -p dev-clean tests/data/LibriTTS tests/data/manifests/libritts
+lhotse cut simple --force-eager \
+    -r tests/data/manifests/libritts/libritts_recordings_dev-clean.jsonl.gz \
+    -s tests/data/manifests/libritts/libritts_supervisions_dev-clean.jsonl.gz \
+    tests/data/libritts_cuts_dev-clean.jsonl.gz
+
 make test
 ```
 

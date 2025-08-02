@@ -12,7 +12,7 @@ def test_version():
 def test_author():
     """Test that author information is accessible."""
     assert hasattr(discoss, "__author__")
-    assert discoss.__author__ == "lifeiteng"
+    assert discoss.__author__ == "Feiteng Li"
 
 
 def test_description():

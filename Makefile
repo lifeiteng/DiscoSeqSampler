@@ -1,12 +1,13 @@
 # Makefile for DiscoSeqSampler development
 
-.PHONY: help pre-commit setup-dev
+.PHONY: help pre-commit setup-dev test
 
 # Default target
 help:
 	@echo "Available targets:"
 	@echo "  pre-commit   - Install and run pre-commit hooks"
 	@echo "  setup-dev    - Setup development environment"
+	@echo "  test         - Run tests"
 
 # Pre-commit
 pre-commit:
@@ -20,3 +21,7 @@ setup-dev:
 	pre-commit install
 	pre-commit install --hook-type commit-msg
 	@echo "Development environment setup complete!"
+
+# Test
+test:
+	python -m pytest tests/ -v
