@@ -1,6 +1,5 @@
 include README.md
 include LICENSE
-include pyproject.toml
 include setup.py
 recursive-include discoss *.py
 recursive-exclude * __pycache__

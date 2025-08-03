@@ -56,9 +56,12 @@ setup(
         "Topic :: Scientific/Engineering",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.10",
     install_requires=[
         "lhotse==1.30.3",
+        "torch==2.7.1",
+        "torchaudio==2.7.1",
+        "torchcodec==0.5",
     ],
     extras_require={
         "dev": [

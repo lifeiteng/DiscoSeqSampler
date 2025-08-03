@@ -194,3 +194,6 @@ cython_debug/
 .cursorindexingignore
 
 tests/data
+.DS_Store
+.vscode/
+discoss/data/

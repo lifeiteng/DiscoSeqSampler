@@ -194,5 +194,4 @@ twine upload dist/*
 ### 获取帮助
 
 - 查看 Makefile：`make help`
-- 检查工具配置：`pyproject.toml`
 - 查看 CI 日志：GitHub Actions 页面

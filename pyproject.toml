@@ -30,7 +30,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "lhotse==1.30.3",
+    # "lhotse==1.30.3",
 ]
 
 [project.optional-dependencies]
