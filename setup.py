@@ -21,16 +21,10 @@ def get_version():
     here = os.path.abspath(os.path.dirname(__file__))
     version_file = os.path.join(here, "discoss", "__init__.py")
 
-    # If __init__.py doesn't have version, return default
-    if not os.path.exists(version_file):
-        return "0.1.0"
-
     with open(version_file, encoding="utf-8") as f:
         for line in f:
             if line.startswith("__version__"):
                 return line.split("=")[1].strip().strip('"').strip("'")
-
-    return "0.1.0"
 
 
 setup(
