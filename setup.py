@@ -66,7 +66,6 @@ setup(
             # Code formatting and linting
             "black>=23.0",
             "isort>=5.12",
-            "ruff>=0.1.0",
             "mypy>=1.5",
             # Pre-commit hooks
             "pre-commit>=3.0",

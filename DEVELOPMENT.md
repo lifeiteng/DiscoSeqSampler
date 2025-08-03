@@ -31,7 +31,6 @@ pre-commit install --hook-type commit-msg
 项目配置了以下工具来确保代码质量：
 
 - **Black**: Python 代码格式化
-- **Ruff**: 快速的 Python linter（替代 flake8、isort 等）
 - **MyPy**: 静态类型检查
 - **Bandit**: 安全漏洞检查
 - **Pytest**: 测试框架
@@ -48,8 +47,6 @@ make pre-commit
 
 # 直接使用工具命令
 black .              # 格式化代码
-ruff check .         # 运行 linting
-ruff format .        # 格式化代码
 mypy discoss         # 类型检查
 pytest               # 运行测试
 pytest --cov=discoss # 运行测试并生成覆盖率
@@ -63,17 +60,11 @@ pytest --cov=discoss # 运行测试并生成覆盖率
 
 - Python
 - Black Formatter
-- Ruff
 - Mypy Type Checker
 - Pre-commit
 
 项目已配置 `.editorconfig` 文件来确保编辑器设置一致。
 
-#### PyCharm
-
-- 启用 Black 作为代码格式化工具
-- 配置 Ruff 作为外部工具
-- 启用 MyPy 插件
 
 ## Git 工作流
 
@@ -81,8 +72,7 @@ pytest --cov=discoss # 运行测试并生成覆盖率
 
 每次提交时会自动运行：
 
-1. 代码格式化（Black, Ruff）
-2. 代码检查（Ruff linting）
+1. 代码格式化（Black）
 3. 类型检查（MyPy）
 4. 安全检查（Bandit）
 5. 基础检查（尾随空格、文件结尾等）
@@ -187,7 +177,7 @@ twine upload dist/*
 3. **测试失败**
    ```bash
    # 清理缓存
-   rm -rf .pytest_cache/ .mypy_cache/ .ruff_cache/
+   rm -rf .pytest_cache/ .mypy_cache/
    pytest --cache-clear
    ```
 
