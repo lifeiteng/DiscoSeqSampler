@@ -1,7 +1,6 @@
 # DiscoSeqSampler
 
 [![CI](https://github.com/lifeiteng/DiscoSeqSampler/actions/workflows/ci.yml/badge.svg)](https://github.com/lifeiteng/DiscoSeqSampler/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/lifeiteng/DiscoSeqSampler/branch/main/graph/badge.svg)](https://codecov.io/gh/lifeiteng/DiscoSeqSampler)
 [![PyPI version](https://badge.fury.io/py/discoss.svg)](https://badge.fury.io/py/discoss)
 [![Python version](https://img.shields.io/pypi/pyversions/discoss.svg)](https://pypi.org/project/discoss/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
