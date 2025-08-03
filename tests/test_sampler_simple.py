@@ -8,7 +8,7 @@ import logging
 def _test_sampler(cuts, rank, world_size, max_cuts: int = 10):
     """Test that sampler is accessible and data items."""
     sampler = SimpleCutSampler(
-        cuts=cuts,
+        cuts,
         constraint=TokenConstraint(
             max_tokens=1000,
             max_cuts=max_cuts,
