@@ -12,7 +12,7 @@ logging.basicConfig(
 @pytest.fixture()
 def cuts_file():
     """Provide sample data for tests."""
-    return "tests/data/libritts_cuts_dev-clean.jsonl.gz"
+    return "example/tests/data/audio_cuts.jsonl.gz"
 
 
 @pytest.fixture()
@@ -20,7 +20,7 @@ def audio_cuts():
     """Provide sample data for tests."""
     from lhotse import CutSet
 
-    return CutSet.from_jsonl("tests/data/libritts_cuts_dev-clean.jsonl.gz")
+    return CutSet.from_jsonl("example/tests/data/audio_cuts.jsonl.gz")
 
 
 @pytest.fixture()
