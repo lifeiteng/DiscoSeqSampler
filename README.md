@@ -23,6 +23,7 @@ DiscoSeqSampler 正是为了解决这一关键问题而设计的分布式序列�
 - 🔧 **可配置**: 灵活的配置选项
 
 ## 安装
+* **项目仍在开发中，功能尚未完整验证**
 
 ### 从 PyPI 安装
 
@@ -85,7 +86,7 @@ make test
 ```bibtex
 @software{discoss2024,
   title={DiscoSeqSampler: Distributed Coordinated Sequence Sampler},
-  author={Li, Feiteng},
+  author={Feiteng Li},
   year={2025},
   url={https://github.com/lifeiteng/DiscoSeqSampler}
 }

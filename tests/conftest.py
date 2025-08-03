@@ -12,7 +12,7 @@ logging.basicConfig(
 @pytest.fixture()
 def cuts_file():
     """Provide sample data for tests."""
-    return "example/tests/data/audio_cuts.jsonl.gz"
+    return "examples/audio_cuts.jsonl.gz"
 
 
 @pytest.fixture()
@@ -20,7 +20,35 @@ def audio_cuts():
     """Provide sample data for tests."""
     from lhotse import CutSet
 
-    return CutSet.from_jsonl("example/tests/data/audio_cuts.jsonl.gz")
+    return CutSet.from_jsonl("examples/audio_cuts.jsonl.gz")
+
+
+@pytest.fixture()
+def image_cuts():
+    """Provide sample data for tests."""
+    from lhotse import CutSet
+
+    return CutSet.from_jsonl("examples/image_cuts.jsonl.gz")
+
+
+@pytest.fixture()
+def video_cuts():
+    """Provide sample data for tests."""
+    from lhotse import CutSet
+
+    return CutSet.from_jsonl("examples/video_cuts.jsonl.gz")
+
+
+@pytest.fixture()
+def text_cuts():
+    """Provide sample text cuts for tests."""
+    raise NotImplementedError(
+        "This fixture should be implemented when you add the actual text cuts."
+    )
+
+    from lhotse import CutSet
+
+    return CutSet.from_jsonl("examples/text_cuts.jsonl.gz")
 
 
 @pytest.fixture()
