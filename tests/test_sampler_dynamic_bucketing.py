@@ -6,13 +6,19 @@ import logging
 
 
 def _test_sampler(
-    cuts_file, rank, world_size, max_cuts: int = 10, drop_last: bool = False
+    cuts_file,
+    rank,
+    world_size,
+    constraint: TokenConstraint = None,
+    max_cuts: int = 10,
+    drop_last: bool = False,
 ):
     """Test that sampler is accessible and data items."""
     cuts = CutSet.from_jsonl_lazy(cuts_file)
     sampler = DynamicBucketingCutSampler(
         cuts,
-        constraint=TokenConstraint(
+        constraint=constraint
+        or TokenConstraint(
             max_tokens=4000,
             max_cuts=max_cuts,
             quadratic_length=None,
@@ -30,8 +36,8 @@ def _test_sampler(
         num_cuts += len(batch)
         batches.append(batch)
 
-    assert (
-        len(cuts) // world_size - num_cuts <= max_cuts
+    assert len(cuts) // world_size - num_cuts <= (
+        max_cuts * (int(drop_last) + 1)
     ), f"{rank=} {world_size=} Expected {len(cuts) // world_size} cuts, got {num_cuts} cuts({max_cuts=})."
 
     # num_batches = len(batches)
@@ -68,3 +74,54 @@ def test_sampler_dynamic_bucketing_gpu8(cuts_file):
     _test_sampler(cuts_file, 5, 8)
     _test_sampler(cuts_file, 6, 8)
     _test_sampler(cuts_file, 7, 8)
+
+
+def test_sampler_dynamic_bucketing_gpu4_data_sanity(cuts_file):
+    max_tokens, max_cuts = 4000, 10
+    constraint = TokenConstraint(
+        max_tokens=max_tokens,
+        max_cuts=max_cuts,
+        quadratic_length=None,
+    )
+
+    batches_1 = _test_sampler(cuts_file, 0, 4, constraint=constraint, drop_last=True)
+    batches_2 = _test_sampler(cuts_file, 1, 4, constraint=constraint, drop_last=True)
+    batches_3 = _test_sampler(cuts_file, 2, 4, constraint=constraint, drop_last=True)
+    batches_4 = _test_sampler(cuts_file, 3, 4, constraint=constraint, drop_last=True)
+
+    # 1. check num batches(drop_last=True)
+    assert len(batches_1) == len(batches_2) == len(batches_3) == len(batches_4)
+
+    bad_count = 0
+    for b1, b2, b3, b4 in zip(batches_1, batches_2, batches_3, batches_4):
+        batch_size = [len(b1), len(b2), len(b3), len(b4)]
+
+        # 2. check max_cuts
+        assert max(batch_size) <= max_cuts
+        if max(batch_size) - min(batch_size) >= 2:
+            bad_count += 1
+
+        # 3. check data uniqueness
+        # Ensure that cuts in each batch are unique across all batches
+        cut_ids = (
+            [c.id for c in b1]
+            + [c.id for c in b2]
+            + [c.id for c in b3]
+            + [c.id for c in b4]
+        )
+        assert len(cut_ids) == len(
+            set(cut_ids)
+        ), "Cut IDs are not unique across batches."
+
+        # 4. check num tokens
+        for b in [b1, b2, b3, b4]:
+            lengths = [constraint.measure_length(cut) for cut in b]
+            if max(lengths) <= max_tokens:
+                assert sum(lengths) <= max_tokens + max(lengths)
+            else:
+                logging.info(f"{lengths=} sum > {max_tokens=}")
+
+    # 5. check batch size consistency across ranks
+    assert (
+        bad_count / len(batches_1) < 0.1
+    ), f"Batch sizes are not consistent across ranks: {bad_count}/{len(batches_1)}."
