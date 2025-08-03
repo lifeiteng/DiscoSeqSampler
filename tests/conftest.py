@@ -1,12 +1,26 @@
 """Test configuration and fixtures."""
-
+import logging
 import pytest
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 
 @pytest.fixture()
 def cuts_file():
     """Provide sample data for tests."""
     return "tests/data/libritts_cuts_dev-clean.jsonl.gz"
+
+
+@pytest.fixture()
+def audio_cuts():
+    """Provide sample data for tests."""
+    from lhotse import CutSet
+
+    return CutSet.from_jsonl("tests/data/libritts_cuts_dev-clean.jsonl.gz")
 
 
 @pytest.fixture()

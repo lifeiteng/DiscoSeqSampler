@@ -24,4 +24,4 @@ setup-dev:
 
 # Test
 test:
-	python -m pytest tests/ -v
+	python -m pytest tests/ -v -s

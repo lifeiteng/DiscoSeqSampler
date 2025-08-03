@@ -25,14 +25,6 @@ repos:
       - id: black
         language_version: python3
 
-  # Ruff for linting and import sorting
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.9
-    hooks:
-      - id: ruff
-        args: [--fix]
-      - id: ruff-format
-
   # Type checking with mypy (simplified)
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.8.0
